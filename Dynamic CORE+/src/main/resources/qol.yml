@@ -1,0 +1,192 @@
+# Quality of Life Configuration
+
+# General Messages
+messages:
+  no-permission: "&cYou don't have permission to use this command."
+  player-not-found: "&cPlayer not found."
+  invalid-arguments: "&cInvalid arguments."
+  player-only: "&cThis command can only be used by players."
+  console-only: "&cThis command can only be used by console."
+  cooldown: "&cYou must wait %time% before using this command again."
+  cost: "&cThis command costs %cost%. You have %balance%."
+  insufficient-funds: "&cYou don't have enough money."
+  teleport-cancelled: "&cTeleportation cancelled due to movement."
+  location-not-safe: "&cDestination is not safe."
+  command-disabled: "&cThis command is disabled."
+  plugin-reloaded: "&aPlugin reloaded successfully."
+  config-reloaded: "&aConfiguration reloaded."
+  player-offline: "&cPlayer is offline."
+  world-not-found: "&cWorld not found."
+  invalid-number: "&cInvalid number."
+  invalid-duration: "&cInvalid duration format. Use: 30s, 5m, 2h, 1d"
+  command-usage: "&cUsage: %usage%"
+
+# Permissions System
+permissions:
+  use-colors: true
+  color-permission: "dynamiccore+.qol.color"
+  op-bypass-cooldowns: true
+  op-bypass-costs: true
+  op-bypass-limits: true
+  permission-groups:
+    default:
+      max-homes: 1
+      max-warps: 0
+    vip:
+      max-homes: 5
+      max-warps: 5
+    premium:
+      max-homes: 10
+      max-warps: 10
+
+# World Border Management
+world-border:
+  enabled: false
+  size: 1000
+  center-x: 0
+  center-z: 0
+  world: "world"
+  warning-distance: 10
+  warning-message: "&cYou are approaching the world border!"
+  damage-amount: 0.1
+  damage-buffer: 5
+  portal-teleport: true
+
+# Metrics and Analytics
+metrics:
+  enabled: true
+  metrics-provider: "bStats"
+  metrics-id: 12345  # Replace with actual bStats ID
+  metrics-opt-in: true
+  metrics-track-commands: true
+  metrics-track-features: true
+
+# Configuration Management
+config:
+  auto-save-interval: 300  # seconds
+  config-reload-permission: "dynamiccore+.moderation.reload"
+  config-backup-on-reload: true
+  config-backup-path: "backups/config/"
+
+# Update System
+updates:
+  check-for-updates: true
+  update-check-interval: 7200  # seconds (2 hours)
+  update-notify-staff: true
+  update-download-automatically: false
+  update-notify-players: false
+
+# Performance Optimization
+performance:
+  async-tasks: true
+  cache-player-data: true
+  cache-expiry: 300  # seconds
+  max-concurrent-teleports: 10
+  teleport-queue-enabled: true
+
+# Multi-World Support
+multi-world:
+  enabled: true
+  world-specific-settings: true
+  default-world: "world"
+  world-inventory-separation: false
+  world-enderchest-separation: false
+  world-teleport-permissions: false
+
+# Kits System
+kits:
+  enabled: false
+  kit-cooldown-permission-bypass: "dynamiccore+.player.kit.bypasscooldown"
+  kit-one-per-life: false
+  kit-signs-enabled: true
+  kit-sign-format:
+    line1: "[Kit]"
+    line2: "%kit%"
+    line3: ""
+    line4: ""
+  # Kits defined in separate file or here
+  kits-list:
+    starter:
+      items:
+        - "WOODEN_SWORD 1"
+        - "BREAD 16"
+      cooldown: 86400  # 1 day
+      permission: "dynamiccore+.player.kit.starter"
+
+# Signs System
+signs:
+  enabled: true
+  sign-colors: true
+  sign-formatting: false
+  sign-max-lines: 4
+  sign-edit-permission: "dynamiccore.sign.edit"
+  sign-protected: false
+  sign-protection-bypass: "dynamiccore.sign.bypass"
+
+# Tab List Management
+tablist:
+  enabled: true
+  header: "&6Welcome to %server%\n&7Online: %online%/%max%"
+  footer: "&7Website: example.com\n&7Discord: discord.gg/example"
+  player-name-format: "&7%player%"
+  sort-players: true
+  tablist-update-interval: 60  # seconds
+
+# Scoreboard Management
+scoreboard:
+  enabled: false
+  title: "&6Server Info"
+  lines:
+    - "&7Online: %online%"
+    - "&7Balance: %balance%"
+    - ""
+    - "&7Website: example.com"
+  scoreboard-update-interval: 60
+
+# Custom Commands
+custom-commands:
+  enabled: false
+  commands:
+    rules:
+      command: "/rules"
+      permission: "dynamiccore+.player.rules"
+      messages:
+        - "&6Server Rules:"
+        - "&71. No griefing"
+        - "&72. No spamming"
+    info:
+      command: "/info"
+      permission: "none"
+      messages:
+        - "&6Server Information"
+        - "&7Version: %version%"
+        - "&7Uptime: %uptime%"
+
+# Auto Announcements
+announcements:
+  enabled: false
+  interval: 300  # seconds
+  random-order: true
+  announcements:
+    - "&6Welcome to the server!"
+    - "&6Remember to follow the rules."
+    - "&6Join our Discord: discord.gg/example"
+
+# Join/Leave Messages
+join-leave:
+  join-message-enabled: true
+  join-message: "&7%player% joined the game"
+  leave-message-enabled: true
+  leave-message: "&7%player% left the game"
+  first-join-message: "&6%player% joined for the first time! Welcome!"
+  join-sound: "ENTITY_PLAYER_LEVELUP"
+  leave-sound: "BLOCK_NOTE_BLOCK_PLING"
+  join-leave-permission-bypass: "dynamiccore+.player.joinleave.bypass"
+
+# Death Messages
+death-messages:
+  enabled: true
+  custom-death-messages: true
+  death-message-format: "&7%player% %deathmessage%"
+  death-lightning: false
+  death-lightning-permission: "dynamiccore+.admin.death.lightning"

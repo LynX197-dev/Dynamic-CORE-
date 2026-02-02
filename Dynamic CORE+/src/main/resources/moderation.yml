@@ -1,0 +1,188 @@
+# Moderation & Admin Tools Configuration
+
+# Mute System
+mute:
+  enabled: true
+  default-duration: 300  # seconds
+  max-duration: 604800  # 7 days
+  mute-reason-required: true
+  mute-permanent-allowed: true
+  mute-appeal-url: ""
+  mute-bypass-permission: "dynamiccore+.moderation.mute.bypass"
+  mute-command-permission: "dynamiccore+.moderation.mute"
+  mute-notify-staff: true
+  mute-prevent-commands: true
+  mute-muted-commands: ["/msg", "/tell", "/w", "/r"]
+  mute-messages:
+    muted: "&cYou have been muted for %duration%. Reason: %reason%"
+    unmuted: "&aYou have been unmuted."
+    already-muted: "&cPlayer is already muted."
+    not-muted: "&cPlayer is not muted."
+    mute-self: "&cYou cannot mute yourself."
+    invalid-duration: "&cInvalid duration format."
+  mute-storage: "file"  # file or database
+
+# Ban System
+ban:
+  enabled: true
+  default-reason: "Violation of server rules"
+  ban-appeal-url: ""
+  ban-ip-ban-enabled: true
+  ban-permanent-allowed: true
+  ban-bypass-permission: "dynamiccore+.player.ban.bypass"
+  ban-command-permission: "dynamiccore+.admin.ban"
+  ban-notify-staff: true
+  ban-kick-on-ban: true
+  ban-messages:
+    banned: "&cYou have been banned. Reason: %reason% Appeal: %appeal%"
+    unbanned: "&aYou have been unbanned."
+    already-banned: "&cPlayer is already banned."
+    not-banned: "&cPlayer is not banned."
+    ban-self: "&cYou cannot ban yourself."
+  ban-storage: "file"
+
+# Kick System
+kick:
+  enabled: true
+  default-reason: "Kicked by staff"
+  kick-command-permission: "dynamiccore+.admin.kick"
+  kick-notify-staff: true
+  kick-messages:
+    kicked: "&cYou have been kicked. Reason: %reason%"
+    kick-self: "&cYou cannot kick yourself."
+  kick-log-enabled: true
+
+# Freeze System
+freeze:
+  enabled: true
+  freeze-command-permission: "dynamiccore+.admin.freeze"
+  freeze-bypass-permission: "dynamiccore+.player.freeze.bypass"
+  freeze-particle-effect: "SNOWFLAKE"
+  freeze-prevent-movement: true
+  freeze-prevent-interaction: true
+  freeze-prevent-commands: true
+  freeze-messages:
+    frozen: "&cYou have been frozen by staff."
+    unfrozen: "&aYou have been unfrozen."
+    already-frozen: "&cPlayer is already frozen."
+    not-frozen: "&cPlayer is not frozen."
+
+# God Mode
+god:
+  enabled: true
+  god-command-permission: "dynamiccore+.admin.god"
+  god-toggle-permission: "dynamiccore+.admin.god.others"
+  god-particle-effect: "TOTEM"
+  god-invulnerable: true
+  god-no-hunger: true
+  god-no-damage: true
+  god-messages:
+    enabled: "&aGod mode enabled."
+    disabled: "&cGod mode disabled."
+    enabled-others: "&aGod mode enabled for %player%."
+    disabled-others: "&cGod mode disabled for %player%."
+
+# Clear Inventory
+clear:
+  enabled: true
+  clear-command-permission: "dynamiccore+.admin.clear"
+  clear-others-permission: "dynamiccore+.admin.clear.others"
+  clear-confirm-required: false
+  clear-messages:
+    cleared: "&aYour inventory has been cleared."
+    cleared-others: "&aInventory cleared for %player%."
+    clear-self: "&cYou cannot clear your own inventory."
+
+# Player Data Management
+player-data:
+  enabled: true
+  reset-inventory-enabled: true
+  reset-inventory-permission: "dynamiccore.reset.inventory"
+  reset-stats-enabled: true
+  reset-stats-permission: "dynamiccore.reset.stats"
+  reset-economy-enabled: true
+  reset-economy-permission: "dynamiccore.reset.economy"
+  reset-all-enabled: true
+  reset-all-permission: "dynamiccore.reset.all"
+  player-data-backup: true
+  player-data-backup-path: "backups/playerdata/"
+
+# Broadcast System
+broadcast:
+  enabled: true
+  prefix: "&c[Broadcast] "
+  broadcast-command-permission: "dynamiccore+.admin.broadcast"
+  broadcast-sound: "ENTITY_PLAYER_LEVELUP"
+  broadcast-center-screen: false
+  broadcast-formatting-codes: true
+
+# Whitelist and Blacklist
+whitelist:
+  enabled: false
+  whitelist-message: "&cYou are not whitelisted on this server."
+  whitelist-add-permission: "dynamiccore+.admin.whitelist.add"
+  whitelist-remove-permission: "dynamiccore+.admin.whitelist.remove"
+
+blacklist:
+  enabled: false
+  blacklist-message: "&cYou are blacklisted from this server."
+  blacklist-add-permission: "dynamiccore+.admin.blacklist.add"
+  blacklist-remove-permission: "dynamiccore+.admin.blacklist.remove"
+  blacklist-ip-enabled: true
+
+# Staff Chat
+staffchat:
+  enabled: true
+  prefix: "&7[Staff] "
+  permission: "dynamiccore+.admin.staffchat"
+  staffchat-toggle-enabled: true
+  staffchat-color: "&b"
+  staffchat-sound: "BLOCK_NOTE_BLOCK_PLING"
+  staffchat-log-to-console: true
+  staffchat-format: "%prefix%%player%&f: %message%"
+  staffchat-muted-worlds: []
+
+  invsee:
+    enabled: true
+    permission: "dynamiccore+.admin.invsee"
+    allow-self: false  # Whether admins can view their own inventory
+    notify-target: false  # Notify the target player when their inventory is being viewed
+    messages:
+      usage: "&cUsage: /invsee <player>"
+      no-permission: "&cYou don't have permission to use this command."
+      player-not-found: "&cPlayer not found."
+      cannot-see-self: "&cYou cannot view your own inventory."
+      opened: "&aOpened inventory of &e%player%&a."
+      target-notified: "&e%admin% &ais viewing your inventory."
+      console: "&cOnly players can use this command."
+
+# Admin Tools
+admin-tools:
+  vanish-enabled: true
+  vanish-permission: "dynamiccore+.admin.vanish"
+  vanish-see-permission: "dynamiccore+.admin.vanish.see"
+  vanish-particle-effect: "SMOKE_NORMAL"
+  vanish-messages:
+    enabled: "&aYou are now vanished."
+    disabled: "&cYou are no longer vanished."
+
+  fly-enabled: true
+  fly-permission: "dynamiccore+.admin.fly"
+  fly-speed-max: 10.0
+  fly-messages:
+    enabled: "&aFly mode enabled."
+    disabled: "&cFly mode disabled."
+
+  heal-enabled: true
+  heal-permission: "dynamiccore+.admin.heal"
+  heal-amount: 20.0
+  heal-messages:
+    healed: "&aYou have been healed."
+    healed-others: "&a%player% has been healed."
+
+  feed-enabled: true
+  feed-permission: "dynamiccore+.admin.feed"
+  feed-amount: 20.0
+  feed-messages:
+    fed: "&aYou have been fed."
+    fed-others: "&a%player% has been fed."

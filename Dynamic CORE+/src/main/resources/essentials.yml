@@ -1,0 +1,194 @@
+# Essentials Configuration
+# This section controls all essential player features like homes, teleportation, etc.
+
+# Home System Configuration
+homes:
+  enabled: true
+  max-homes: 3
+  max-homes-permission-based: true
+  # Permission: dynamiccore.homes.max.<number> for unlimited or specific limits
+  allow-multiple-homes: true
+  allow-bed-homes: true
+  allow-cross-world-homes: true
+  home-delay: 3  # Seconds before teleporting home
+  home-cooldown: 30  # Cooldown between home teleports
+  home-cost: 0.0  # Vault economy cost per home teleport
+  home-teleport-sound: "ENTITY_ENDERMAN_TELEPORT"
+  home-particle-effect: "PORTAL"
+  require-safe-location: true
+  require-build-permission: false
+  home-name-max-length: 16
+  home-name-regex: "^[a-zA-Z0-9_-]+$"
+  home-inventory-save: false
+  home-death-teleport: false
+
+# Spawn Management
+spawn:
+  enabled: true
+  auto-spawn-on-join: false
+  auto-spawn-on-respawn: true
+  spawn-delay: 3
+  spawn-cooldown: 30
+  spawn-cost: 0.0
+  spawn-teleport-sound: "ENTITY_ENDERMAN_TELEPORT"
+  spawn-particle-effect: "PORTAL"
+  spawn-inventory-save: false
+  spawn-safe-location: true
+  spawn-world: "world"
+  spawn-location:
+    x: 0.0
+    y: 64.0
+    z: 0.0
+    yaw: 0.0
+    pitch: 0.0
+  spawn-per-world: false
+  spawn-new-player-kit: ""  # Kit name or empty for none
+
+# Teleportation Requests (TPA)
+tpa:
+  enabled: true
+  timeout: 60  # Seconds to accept TPA request
+  cooldown: 30  # Cooldown between TPA requests
+  max-requests-per-player: 5  # Pending requests per player
+  tpa-delay: 3  # Delay before teleporting
+  tpa-cost: 0.0
+  tpa-teleport-sound: "ENTITY_ENDERMAN_TELEPORT"
+  tpa-particle-effect: "PORTAL"
+  tpa-cross-world: true
+  tpa-require-safe-location: true
+  tpa-here-enabled: true
+  tpa-accept-all-enabled: false
+  tpa-deny-all-enabled: false
+  tpa-toggle-enabled: true  # Players can disable receiving TPA requests
+  tpa-messages:
+    request-sent: "&aTPA request sent to %player%."
+    request-received: "&a%player% wants to teleport to you. Type /tpaccept or /tpdeny."
+    request-accepted: "&aTPA request accepted. Teleporting in %delay% seconds..."
+    request-denied: "&cTPA request denied."
+    request-expired: "&cTPA request expired."
+    player-not-online: "&cPlayer is not online."
+    cooldown: "&cYou must wait %time% before sending another TPA request."
+    toggled-off: "&cTPA requests are disabled for this player."
+    request-sent-here: "&aTPA here request sent to %player%."
+    request-received-here: "&a%player% wants you to teleport to them. Type /tpaccept or /tpdeny."
+    request-accepted-here: "&aTPA here request accepted. Teleporting %player% in %delay% seconds..."
+    request-denied-here: "&cTPA here request denied."
+    request-expired-here: "&cTPA here request expired."
+    request-accepted-requester: "&aYour TPA request was accepted. Teleporting in %delay% seconds..."
+    request-denied-requester: "&cYour TPA request was denied by %player%."
+    request-expired-target: "&cTPA request from %player% expired."
+    tpahere-accepted: "&aTPA here request accepted. Teleporting in %delay% seconds..."
+    tpahere-denied: "&cTPA here request denied."
+    tpahere-accepted-requester: "&aYour TPA here request was accepted. %player% is teleporting to you in %delay% seconds..."
+    tpahere-denied-requester: "&cYour TPA here request was denied by %player%."
+    tpahere-expired: "&cYour TPA here request expired."
+    tpahere-expired-target: "&cTPA here request from %player% expired."
+    no-pending-tpa: "&cYou have no pending TPA requests."
+    teleported: "&aTeleported!"
+    only-players: "&cThis command can only be used by players."
+    tpa-usage: "&cUsage: /tpa <player>"
+    tpahere-usage: "&cUsage: /tpahere <player>"
+    tpa-self: "&cYou cannot send a TPA request to yourself."
+    tpahere-self: "&cYou cannot send a TPA here request to yourself."
+  tpa-cooldown-bypass-permission: "dynamiccore+.essentials.tpa.bypasscooldown"
+
+# Random Teleportation (RTP)
+rtp:
+  enabled: true
+  min-distance: 1000
+  max-distance: 10000
+  max-attempts: 10  # Max tries to find safe location
+  cooldown: 300  # 5 minutes
+  cost: 5.0
+  teleport-sound: "ENTITY_ENDERMAN_TELEPORT"
+  particle-effect: "PORTAL"
+  require-safe-location: true
+  avoid-liquid: true
+  avoid-structures: false
+  biome-blacklist: []
+  world-blacklist: []
+  rtp-delay: 3
+  rtp-inventory-save: false
+  rtp-center-x: 0
+  rtp-center-z: 0
+  rtp-world: "world"
+  rtp-per-world: false
+
+# Back to Death Location
+back:
+  enabled: true
+  max-uses: 5  # Max back commands per death
+  timeout: 300  # 5 minutes to use /back after death
+  delay: 3
+  cooldown: 30
+  cost: 0.0
+  teleport-sound: "ENTITY_ENDERMAN_TELEPORT"
+  particle-effect: "PORTAL"
+  require-safe-location: true
+  back-on-death-only: true
+  back-save-location-on-teleport: false
+
+# Warp System
+warps:
+  enabled: true
+  max-warps: 50  # Max server warps
+  warp-delay: 3
+  warp-cooldown: 30
+  warp-cost: 0.0
+  warp-teleport-sound: "ENTITY_ENDERMAN_TELEPORT"
+  warp-particle-effect: "PORTAL"
+  warp-require-safe-location: true
+  warp-permission-based: true  # dynamiccore.warp.<warpname>
+  warp-signs-enabled: true
+  warp-sign-format:
+    line1: "[Warp]"
+    line2: "%warp%"
+    line3: ""
+    line4: ""
+  warp-list-permission: "dynamiccore+.player.warp.list"
+  warp-create-permission: "dynamiccore+.admin.warp.create"
+  warp-delete-permission: "dynamiccore+.admin.warp.delete"
+  warp-private-enabled: false  # Allow private warps
+
+# AFK Detection
+afk:
+  enabled: true
+  timeout: 300  # 5 minutes
+  kick-on-afk: false
+  kick-delay: 60  # Additional time before kick
+  afk-command-enabled: true
+  afk-auto-detect: true
+  afk-movement-threshold: 0.1  # Blocks moved to not be AFK
+  afk-rotation-threshold: 1.0  # Degrees rotated
+  afk-particle-effect: "SMOKE_NORMAL"
+  afk-broadcast-join-leave: true
+  afk-display-in-tab: true
+  afk-prevent-commands: false  # Block commands while AFK
+  afk-immune-permissions: []
+  afk-messages:
+    entered-afk: "&7%player% is now AFK."
+    exited-afk: "&7%player% is no longer AFK."
+    kicked-afk: "&cYou were kicked for being AFK too long."
+
+# Chat Management
+chat:
+  enabled: true
+  format: "&7%player%&f: %message%"
+  local-chat-radius: 100  # -1 for global
+  chat-cooldown: 0  # Per player cooldown
+  caps-filter-enabled: true
+  caps-percentage: 70  # % caps to trigger
+  caps-replacement: "*lowercased*"
+  spam-filter-enabled: true
+  spam-similarity: 80  # % similarity
+  spam-cooldown: 2
+  chat-colors-enabled: true
+  chat-colors-permission: "dynamiccore.chat.color"
+  chat-mentions-enabled: true
+  chat-mention-sound: "BLOCK_NOTE_BLOCK_PLING"
+  chat-mention-format: "&b@%player%"
+  chat-links-auto-format: true
+  chat-anti-advertising: true
+  chat-anti-advertising-words: ["discord.gg", "mc.server.com"]
+  chat-anti-advertising-action: "warn"  # warn, mute, kick, ban
+  chat-anti-advertising-duration: 300

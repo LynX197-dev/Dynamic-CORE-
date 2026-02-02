@@ -1,0 +1,98 @@
+# Economy Configuration
+# Built-in economy system with no external dependencies.
+
+# Vault Integration
+vault-integration: true
+vault-economy-provider: "auto"  # auto, EssentialsX, etc.
+vault-permissions-provider: "auto"
+vault-chat-provider: "auto"
+
+# Balance Command
+balance:
+  enabled: true
+  display-format: "%.2f"
+  currency-symbol: "$"
+  currency-name-singular: "dollar"
+  currency-name-plural: "dollars"
+  balance-command-aliases: ["bal", "money", "balance"]
+  balance-other-permission: "dynamiccore+.economy.balance.other"
+  balance-top-enabled: true
+  balance-top-max-entries: 10
+  balance-top-update-interval: 300  # seconds
+  balance-negative-allowed: false
+  balance-starting-amount: 0.0
+
+# Pay Command
+pay:
+  enabled: true
+  min-amount: 0.01
+  max-amount: 10000.0
+  pay-tax-rate: 0.0  # Percentage deducted as tax
+  pay-cooldown: 0
+  pay-require-online: true
+  pay-cross-world: true
+  pay-confirm-required: false  # For large amounts
+  pay-confirm-threshold: 1000.0
+  pay-sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+  pay-messages:
+    success: "&aYou paid %amount% to %player%."
+    received: "&aYou received %amount% from %player%."
+    insufficient-funds: "&cYou don't have enough money."
+    player-not-found: "&cPlayer not found."
+    self-pay: "&cYou cannot pay yourself."
+    min-amount: "&cMinimum payment is %amount%."
+    max-amount: "&cMaximum payment is %amount%."
+
+# Daily Reward System
+daily-reward:
+  enabled: true
+  amount: 100.0
+  cooldown-hours: 24
+  streak-enabled: true
+  streak-bonus: 10.0  # Extra per day streak
+  streak-max-days: 30
+  streak-reset-on-miss: true
+  daily-permission: "dynamiccore+.player.daily"
+  daily-sound: "ENTITY_PLAYER_LEVELUP"
+  daily-particle-effect: "VILLAGER_HAPPY"
+  daily-broadcast: false
+  daily-messages:
+    claimed: "&aYou claimed your daily reward of %amount%!"
+    already-claimed: "&cYou already claimed your daily reward. Next in %time%."
+    streak: "&eDaily streak: %streak% days! Bonus: %bonus%"
+
+# Economy Shop Integration (requires shop plugin)
+shop:
+  enabled: false
+  shop-plugin: "ShopGUIPlus"  # ShopGUIPlus, ChestShop, etc.
+  shop-command: "/shop"
+  shop-permission: "dynamiccore+.player.shop"
+
+# Economy Leaderboard
+economy-leaderboard:
+  enabled: true
+  update-interval: 300
+  max-entries: 10
+  display-format: "%rank%. %player% - %balance%"
+
+# Economy Logging
+economy-logging:
+  enabled: true
+  log-file: "economy.log"
+  log-transactions: true
+  log-daily-rewards: true
+  log-admin-commands: true
+
+# Economy Multipliers
+economy-multipliers:
+  global: 1.0
+  permission-based:
+    vip: 1.5
+    premium: 2.0
+
+# Economy Admin Commands
+economy-admin:
+  set-balance-enabled: true
+  add-balance-enabled: true
+  reset-balance-enabled: true
+  economy-admin-permission: "dynamiccore+.moderation.economy.admin"

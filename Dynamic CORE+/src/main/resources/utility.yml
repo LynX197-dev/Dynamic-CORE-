@@ -1,0 +1,149 @@
+# Utility Configuration
+
+# Item Repair
+repair:
+  enabled: true
+  cost: 10.0
+  repair-all-enabled: true
+  repair-all-cost: 50.0
+  repair-armor-enabled: true
+  repair-armor-cost: 25.0
+  repair-tools-enabled: true
+  repair-tools-cost: 15.0
+  repair-permission: "dynamiccore+.utility.repair"
+  repair-sound: "BLOCK_ANVIL_USE"
+  repair-particle-effect: "SMOKE_NORMAL"
+  repair-max-durability: true  # Repair to full durability
+  repair-messages:
+    repaired: "&aItem repaired for %cost%."
+    insufficient-funds: "&cYou don't have enough money."
+    not-repairable: "&cThis item cannot be repaired."
+
+# Enchantments
+enchant:
+  enabled: true
+  max-level: 10
+  cost-multiplier: 1.0
+  enchant-permission: "dynamiccore+.player.enchant"
+  enchant-safe-only: true  # Only safe enchants
+  enchant-allow-incompatible: false
+  enchant-cost-base: 5.0
+  enchant-cost-per-level: 2.0
+  enchant-sound: "BLOCK_ENCHANTMENT_TABLE_USE"
+  enchant-particle-effect: "ENCHANTMENT_TABLE"
+  enchant-blacklisted-enchants: []
+  enchant-messages:
+    enchanted: "&aEnchanted %item% with %enchant% %level% for %cost%."
+    insufficient-funds: "&cYou don't have enough money."
+    max-level: "&cMaximum level is %level%."
+    incompatible: "&cThis enchant is incompatible."
+
+# Item Rename
+rename:
+  enabled: true
+  cost: 5.0
+  rename-permission: "dynamiccore+.player.rename"
+  rename-max-length: 50
+  rename-allow-colors: true
+  rename-allow-formatting: false
+  rename-blacklisted-words: []
+  rename-sound: "BLOCK_ANVIL_USE"
+  rename-messages:
+    renamed: "&aItem renamed for %cost%."
+    insufficient-funds: "&cYou don't have enough money."
+    too-long: "&cName is too long."
+    invalid-name: "&cInvalid name."
+
+# Player Statistics
+stats:
+  enabled: true
+  stats-permission: "dynamiccore+.player.stats"
+  stats-others-permission: "dynamiccore+.player.stats.others"
+  stats-show-uuid: false
+  stats-show-ip: false
+  stats-show-location: true
+  stats-show-playtime: true
+  stats-show-first-join: true
+  stats-show-last-seen: true
+  stats-show-kills: true
+  stats-show-deaths: true
+  stats-show-mob-kills: true
+  stats-show-blocks-broken: true
+  stats-show-blocks-placed: true
+  stats-show-distance-walked: true
+  stats-show-economy: true
+  stats-format:
+    header: "&6=== %player%'s Stats ==="
+    playtime: "&7Playtime: %playtime%"
+    first-join: "&7First Join: %firstjoin%"
+    last-seen: "&7Last Seen: %lastseen%"
+    kills: "&7Kills: %kills%"
+    deaths: "&7Deaths: %deaths%"
+    balance: "&7Balance: %balance%"
+
+# Leaderboards
+leaderboard:
+  enabled: true
+  update-interval: 300  # seconds
+  max-entries: 10
+  leaderboard-permission: "dynamiccore+.player.leaderboard"
+  leaderboard-types:
+    kills:
+      enabled: true
+      display-name: "Top Killers"
+    deaths:
+      enabled: true
+      display-name: "Top Deaths"
+    balance:
+      enabled: true
+      display-name: "Top Balances"
+    playtime:
+      enabled: true
+      display-name: "Top Playtime"
+    blocks-broken:
+      enabled: true
+      display-name: "Top Miners"
+    blocks-placed:
+      enabled: true
+      display-name: "Top Builders"
+  leaderboard-format:
+    header: "&6=== %type% ==="
+    entry: "&7%rank%. %player% - %value%"
+  leaderboard-sound: "ENTITY_PLAYER_LEVELUP"
+
+# Grief Protection (Basic)
+grief-protection:
+  enabled: false
+  protection-radius: 10  # Blocks around spawn
+  protected-worlds: ["world"]
+  protection-allow-break: false
+  protection-allow-place: false
+  protection-allow-interact: false
+  protection-message: "&cYou cannot %action% here."
+  protection-bypass-permission: "dynamiccore+.player.grief.bypass"
+  protection-log-violations: true
+
+# Time and Weather Commands
+time-weather:
+  time-enabled: true
+  time-permission: "dynamiccore.time"
+  time-set-permission: "dynamiccore.time.set"
+  weather-enabled: true
+  weather-permission: "dynamiccore.weather"
+  weather-set-permission: "dynamiccore.weather.set"
+  time-weather-messages:
+    time-set: "&aTime set to %time%."
+    weather-set: "&aWeather set to %weather%."
+
+# Game Mode Commands
+gamemode:
+  enabled: true
+  gamemode-permission: "dynamiccore+.admin.gamemode"
+  gamemode-others-permission: "dynamiccore+.admin.gamemode.others"
+  gamemode-survival-permission: "dynamiccore+.admin.gamemode.survival"
+  gamemode-creative-permission: "dynamiccore+.admin.gamemode.creative"
+  gamemode-adventure-permission: "dynamiccore+.admin.gamemode.adventure"
+  gamemode-spectator-permission: "dynamiccore+.admin.gamemode.spectator"
+  gamemode-messages:
+    changed: "&aGamemode changed to %gamemode%."
+    changed-others: "&a%player%'s gamemode changed to %gamemode%."
