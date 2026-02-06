@@ -41,26 +41,52 @@ public class TPAAcceptCommand implements CommandExecutor {
         int delay = plugin.getConfigManager().getInt("essentials.tpa.tpa-delay", 3);
         if (request.getType() == TPARequest.Type.TPA) {
             player.sendMessage(plugin.getConfigManager().getMessage("request-accepted").replace("%delay%", String.valueOf(delay)));
-            requester.sendMessage(plugin.getConfigManager().getMessage("request-accepted-requester").replace("%delay%", String.valueOf(delay)));
+            if (delay <= 0) {
+                plugin.getPlayerDataManager().setLastLocation(requester, requester.getLocation());
+                requester.teleport(player);
+                requester.sendMessage(plugin.getConfigManager().getMessage("teleported"));
+                return true;
+            }
+            String countdownMessage = plugin.getConfigManager().getMessage("request-accepted-requester");
             new BukkitRunnable() {
+                int remaining = delay;
                 @Override
                 public void run() {
-                    plugin.getPlayerDataManager().setLastLocation(requester, requester.getLocation());
-                    requester.teleport(player);
-                    requester.sendMessage(plugin.getConfigManager().getMessage("teleported"));
+                    if (remaining <= 0) {
+                        plugin.getPlayerDataManager().setLastLocation(requester, requester.getLocation());
+                        requester.teleport(player);
+                        requester.sendMessage(plugin.getConfigManager().getMessage("teleported"));
+                        cancel();
+                        return;
+                    }
+                    requester.sendMessage(countdownMessage.replace("%delay%", String.valueOf(remaining)));
+                    remaining--;
                 }
-            }.runTaskLater(plugin, 20L * delay);
+            }.runTaskTimer(plugin, 0L, 20L);
         } else { // TPAHERE
-            player.sendMessage(plugin.getConfigManager().getMessage("request-accepted-here").replace("%delay%", String.valueOf(delay)));
             requester.sendMessage(plugin.getConfigManager().getMessage("tpahere-accepted-requester").replace("%delay%", String.valueOf(delay)));
+            if (delay <= 0) {
+                plugin.getPlayerDataManager().setLastLocation(player, player.getLocation());
+                player.teleport(requester);
+                player.sendMessage(plugin.getConfigManager().getMessage("teleported"));
+                return true;
+            }
+            String countdownMessage = plugin.getConfigManager().getMessage("request-accepted-here");
             new BukkitRunnable() {
+                int remaining = delay;
                 @Override
                 public void run() {
-                    plugin.getPlayerDataManager().setLastLocation(player, player.getLocation());
-                    player.teleport(requester);
-                    player.sendMessage(plugin.getConfigManager().getMessage("teleported"));
+                    if (remaining <= 0) {
+                        plugin.getPlayerDataManager().setLastLocation(player, player.getLocation());
+                        player.teleport(requester);
+                        player.sendMessage(plugin.getConfigManager().getMessage("teleported"));
+                        cancel();
+                        return;
+                    }
+                    player.sendMessage(countdownMessage.replace("%delay%", String.valueOf(remaining)));
+                    remaining--;
                 }
-            }.runTaskLater(plugin, 20L * delay);
+            }.runTaskTimer(plugin, 0L, 20L);
         }
 
         return true;

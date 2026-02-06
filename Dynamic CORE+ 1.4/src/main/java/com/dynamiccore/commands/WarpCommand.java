@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.Location;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class WarpCommand implements CommandExecutor {
 
@@ -44,13 +45,7 @@ public class WarpCommand implements CommandExecutor {
         }
 
         int delay = plugin.getConfigManager().getInt("essentials.warp.teleport-delay", 3);
-        player.sendMessage(plugin.getConfigManager().colorize(
-            plugin.getConfigManager().getEssentialsConfig()
-                .getString("warp.teleporting", "&eTeleporting to warp in &f%delay%&e seconds...")
-                .replace("%delay%", String.valueOf(delay))
-        ));
-
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+        if (delay <= 0) {
             plugin.getPlayerDataManager().setLastLocation(player, player.getLocation());
             player.teleport(warp);
             player.sendMessage(plugin.getConfigManager().colorize(
@@ -58,7 +53,34 @@ public class WarpCommand implements CommandExecutor {
                     .getString("warp.teleported", "&aTeleported to warp '&f%warp%&a'!")
                     .replace("%warp%", warpName)
             ));
-        }, 20L * delay);
+            return true;
+        }
+
+        new BukkitRunnable() {
+            int remaining = delay;
+
+            @Override
+            public void run() {
+                if (remaining <= 0) {
+                    plugin.getPlayerDataManager().setLastLocation(player, player.getLocation());
+                    player.teleport(warp);
+                    player.sendMessage(plugin.getConfigManager().colorize(
+                        plugin.getConfigManager().getEssentialsConfig()
+                            .getString("warp.teleported", "&aTeleported to warp '&f%warp%&a'!")
+                            .replace("%warp%", warpName)
+                    ));
+                    cancel();
+                    return;
+                }
+
+                player.sendMessage(plugin.getConfigManager().colorize(
+                    plugin.getConfigManager().getEssentialsConfig()
+                        .getString("warp.teleporting", "&eTeleporting to warp in &f%delay%&e seconds...")
+                        .replace("%delay%", String.valueOf(remaining))
+                ));
+                remaining--;
+            }
+        }.runTaskTimer(plugin, 0L, 20L);
 
         return true;
     }

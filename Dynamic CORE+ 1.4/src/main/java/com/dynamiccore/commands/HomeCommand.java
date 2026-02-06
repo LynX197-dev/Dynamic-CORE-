@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.Location;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class HomeCommand implements CommandExecutor {
 
@@ -36,13 +37,7 @@ public class HomeCommand implements CommandExecutor {
         }
 
         int delay = plugin.getConfigManager().getInt("essentials.home.teleport-delay", 3);
-        player.sendMessage(plugin.getConfigManager().colorize(
-            plugin.getConfigManager().getEssentialsConfig()
-                .getString("home.teleporting", "&eTeleporting to home in &f%delay%&e seconds...")
-                .replace("%delay%", String.valueOf(delay))
-        ));
-
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+        if (delay <= 0) {
             plugin.getPlayerDataManager().setLastLocation(player, player.getLocation());
             player.teleport(home);
             player.sendMessage(plugin.getConfigManager().colorize(
@@ -50,7 +45,34 @@ public class HomeCommand implements CommandExecutor {
                     .getString("home.teleported", "&aTeleported to home '&f%home%&a'!")
                     .replace("%home%", homeName)
             ));
-        }, 20L * delay);
+            return true;
+        }
+
+        new BukkitRunnable() {
+            int remaining = delay;
+
+            @Override
+            public void run() {
+                if (remaining <= 0) {
+                    plugin.getPlayerDataManager().setLastLocation(player, player.getLocation());
+                    player.teleport(home);
+                    player.sendMessage(plugin.getConfigManager().colorize(
+                        plugin.getConfigManager().getEssentialsConfig()
+                            .getString("home.teleported", "&aTeleported to home '&f%home%&a'!")
+                            .replace("%home%", homeName)
+                    ));
+                    cancel();
+                    return;
+                }
+
+                player.sendMessage(plugin.getConfigManager().colorize(
+                    plugin.getConfigManager().getEssentialsConfig()
+                        .getString("home.teleporting", "&eTeleporting to home in &f%delay%&e seconds...")
+                        .replace("%delay%", String.valueOf(remaining))
+                ));
+                remaining--;
+            }
+        }.runTaskTimer(plugin, 0L, 20L);
 
         return true;
     }
